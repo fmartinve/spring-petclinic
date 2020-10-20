@@ -21,7 +21,7 @@ RUN mvn install && mv target/$project-*.jar target/$project.jar
 
 FROM openjdk:jre-alpine as production
 ARG dir=/app
-ARG dir_old=/buid/target
+ARG dir_old=/build/target
 ARG project=spring-petclinic
 WORKDIR $dir
 COPY --from=build $dir_old/$project.jar .
