@@ -18,7 +18,7 @@ jobs:
           while true
             do
               sleep 1
-              docket ps | grep Up && break
+              docker ps | grep Up && break
             done
           while true
             do
