@@ -15,7 +15,7 @@ ARG project=sprint-petclinic
 ARG dir=/build
 ARG dir_old=/clone
 WORKDIR $dir
-COPY --from=clone $dir_old/$project
+COPY --from=clone $dir_old/$project .
 RUN mvn install && mv target/$project-*.jar target/$project.jar
 
 
@@ -24,7 +24,7 @@ ARG dir=/app
 ARG dir_old=/buid/target
 ARG project=sprint-petclinic
 WORKDIR $dir
-COPY --from=build $dir_old/$project.jar
+COPY --from=build $dir_old/$project.jar .
 
 ENTRYPOINT ["java","-jar"]
 CMD ["sprint-petclinic.jar"]
