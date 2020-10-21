@@ -8,7 +8,7 @@ ARG username=fmartinve
 ARG project=spring-petclinic
 ARG dir=/clone
 WORKDIR $dir
-RUN git clone https://$hostname/$username/$project
+RUN git clone https://$hostname/$username/$project --single-branch -b dev
 
 FROM maven:alpine AS build
 ARG project=spring-petclinic
@@ -18,13 +18,13 @@ WORKDIR $dir
 COPY --from=clone $dir_old/$project .
 RUN mvn install && mv target/$project-*.jar target/$project.jar
 
-
 FROM openjdk:jre-alpine as production
 ARG dir=/app
 ARG dir_old=/build/target
 ARG project=spring-petclinic
 WORKDIR $dir
-COPY --from=build $dir_old/$project.jar .
+//COPY --from=build $dir_old/$project.jar .
+COPY --from=1 $dir_old/$project.jar .
 
 ENTRYPOINT ["java","-jar"]
 CMD ["spring-petclinic.jar"]
