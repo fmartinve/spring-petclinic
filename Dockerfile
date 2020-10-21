@@ -8,7 +8,7 @@ ARG username=fmartinve
 ARG project=spring-petclinic
 ARG dir=/clone
 WORKDIR $dir
-RUN git clone https://$hostname/$username/$project --single-branch -b dev
+RUN git clone https://$hostname/$username/$project --single-branch -b v2.2
 
 FROM maven:alpine AS build
 ARG project=spring-petclinic
